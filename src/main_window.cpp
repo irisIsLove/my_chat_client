@@ -1,7 +1,7 @@
-#include "login_dialog.h"
 #include "main_window.h"
-#include "ui_main_window.h"
+#include "login_dialog.h"
 #include "register_dialog.h"
+#include "ui_main_window.h"
 
 MainWindow::MainWindow(QWidget* parent)
   : QMainWindow(parent)

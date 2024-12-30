@@ -6,6 +6,8 @@ LoginDialog::LoginDialog(QWidget* parent)
   , ui(new Ui::LoginDialog)
 {
   ui->setupUi(this);
+  ui->editPass->setEchoMode(QLineEdit::Password);
+
   connect(ui->btnRegist,
           &QPushButton::clicked,
           this,

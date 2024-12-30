@@ -14,6 +14,12 @@ public:
   explicit RegisterDialog(QWidget* parent = nullptr);
   ~RegisterDialog();
 
+private slots:
+  void onGetCodeClicked();
+
+private:
+  void showTip(const QString& tip, bool isOk);
+
 private:
   Ui::RegisterDialog* ui;
 };

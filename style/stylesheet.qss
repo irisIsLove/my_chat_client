@@ -5,3 +5,11 @@ QDialog#LoginDialog, #RegisterDialog {
 #lbUser, #lbPass {
     color: black;
 }
+
+#lbErrTip[state='normal'] {
+    color: green;
+}
+
+#lbErrTip[state='error'] {
+    color: red;
+}
