@@ -1,9 +1,10 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
-#include <iostream>
 #include <memory>
 #include <mutex>
+
+#include <fmt/core.h>
 
 template<typename T>
 class Singleton
@@ -16,7 +17,7 @@ public:
     return m_instance.get();
   }
 
-  ~Singleton() { std::cout << "Singleton destroyed\n"; }
+  ~Singleton() { fmt::println("Singleton destroyed"); }
 
 protected:
   Singleton() = default;

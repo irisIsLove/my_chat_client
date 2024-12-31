@@ -17,4 +17,5 @@ set(RC_ICONS "icon.rc")
 add_executable(MyChatClient ${SOURCES} ${RESOURCES} ${RC_ICONS})
 
 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
-target_link_libraries(MyChatClient PRIVATE Qt5::Widgets Qt5::Network)
+find_package(fmt CONFIG REQUIRED)
+target_link_libraries(MyChatClient PRIVATE Qt5::Widgets Qt5::Network fmt::fmt)
