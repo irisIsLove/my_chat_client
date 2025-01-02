@@ -1,10 +1,10 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
+#include <fmt/core.h>
+
 #include <memory>
 #include <mutex>
-
-#include <fmt/core.h>
 
 template<typename T>
 class Singleton
