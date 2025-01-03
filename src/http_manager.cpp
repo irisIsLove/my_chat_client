@@ -12,6 +12,7 @@ HttpManager::onHttpFinished(RequestID reqId,
                             Modules mod)
 {
   if (mod == Modules::MOD_REGISTER) {
+    emit sigRegisterFinished(reqId, res, err);
   }
 }
 

@@ -19,3 +19,5 @@ add_executable(MyChatClient ${SOURCES} ${RESOURCES} ${RC_ICONS})
 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 target_link_libraries(MyChatClient PRIVATE Qt5::Widgets Qt5::Network fmt::fmt)
+
+file(COPY_FILE config.ini ${CMAKE_BINARY_DIR}/config.ini)

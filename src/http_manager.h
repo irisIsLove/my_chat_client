@@ -16,6 +16,10 @@ class HttpManager
 
 public:
   ~HttpManager();
+  void PostHttpRequest(const QUrl& url,
+                       const QJsonObject& json,
+                       RequestID reqId,
+                       Modules mod);
 
 private slots:
   void onHttpFinished(RequestID reqId,
@@ -29,10 +33,6 @@ signals:
 
 private:
   HttpManager();
-  void PostHttpRequest(const QUrl& url,
-                       const QJsonObject& json,
-                       RequestID reqId,
-                       Modules mod);
 
 private:
   QNetworkAccessManager m_manager;

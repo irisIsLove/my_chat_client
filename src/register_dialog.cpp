@@ -23,7 +23,7 @@ RegisterDialog::RegisterDialog(QWidget* parent)
           &QPushButton::clicked,
           this,
           &RegisterDialog::onGetCodeClicked);
-  connect(HttpManager::getInstance(),
+  connect(HttpManager::getInstance().get(),
           &HttpManager::sigRegisterFinished,
           this,
           &RegisterDialog::onRegisterFinished);
@@ -43,7 +43,13 @@ RegisterDialog::onGetCodeClicked()
 
   bool match = regex.match(email).hasMatch();
   if (match) {
-    // TODO: http send code
+    QJsonObject jsonObj;
+    jsonObj["email"] = email;
+    HttpManager::getInstance()->PostHttpRequest(
+      QUrl(gateUrlPrefix + "/get_varify_code"),
+      jsonObj,
+      RequestID::ID_GET_VARIFY_CODE,
+      Modules::MOD_REGISTER);
   } else {
     showTip("邮箱地址不正确", false);
   }
@@ -80,9 +86,9 @@ void
 RegisterDialog::initHttpHandler()
 {
   m_handlers.emplace(
-    RequestID::ID_GET_VERIFY_CODE, [this](const QJsonObject& obj) {
+    RequestID::ID_GET_VARIFY_CODE, [this](const QJsonObject& obj) {
       ErrorCode err = static_cast<ErrorCode>(obj["error"].toInt());
-      if (err == ErrorCode::SUCCESS) {
+      if (err != ErrorCode::SUCCESS) {
         showTip("参数错误", false);
         return;
       }

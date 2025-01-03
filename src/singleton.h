@@ -10,11 +10,11 @@ template<typename T>
 class Singleton
 {
 public:
-  static T* getInstance()
+  static std::shared_ptr<T> getInstance()
   {
     static std::once_flag flag;
-    std::call_once(flag, [&]() { m_instance = std::unique_ptr<T>(new T); });
-    return m_instance.get();
+    std::call_once(flag, [&]() { m_instance = std::shared_ptr<T>(new T); });
+    return m_instance;
   }
 
   ~Singleton() { fmt::println("Singleton destroyed"); }
@@ -24,10 +24,10 @@ protected:
   Singleton(const Singleton<T>&) = delete;
   Singleton& operator=(const Singleton<T>&) = delete;
 
-  static std::unique_ptr<T> m_instance;
+  static std::shared_ptr<T> m_instance;
 };
 
 template<typename T>
-std::unique_ptr<T> Singleton<T>::m_instance = nullptr;
+std::shared_ptr<T> Singleton<T>::m_instance = nullptr;
 
 #endif // SINGLETON_H
