@@ -27,6 +27,10 @@ RegisterDialog::RegisterDialog(QWidget* parent)
           &HttpManager::sigRegisterFinished,
           this,
           &RegisterDialog::onRegisterFinished);
+  connect(ui->btnConfirm,
+          &QPushButton::clicked,
+          this,
+          &RegisterDialog::onConfirmClicked);
 }
 
 RegisterDialog::~RegisterDialog()
@@ -74,6 +78,46 @@ RegisterDialog::onRegisterFinished(RequestID redId,
 }
 
 void
+RegisterDialog::onConfirmClicked()
+{
+  if (ui->editUser->text().isEmpty()) {
+    showTip("用户名不能为空", false);
+    return;
+  }
+
+  if (ui->editPass->text().isEmpty()) {
+    showTip("密码不能为空", false);
+    return;
+  }
+
+  if (ui->editEmail->text().isEmpty()) {
+    showTip("邮箱不能为空", false);
+    return;
+  }
+
+  if (ui->editVerify->text() != ui->editPass->text()) {
+    showTip("密码不匹配", false);
+    return;
+  }
+
+  if (ui->editCode->text().isEmpty()) {
+    showTip("验证码不能为空", false);
+    return;
+  }
+
+  QJsonObject jsonObj;
+  jsonObj["user"] = ui->editUser->text();
+  jsonObj["pass"] = ui->editPass->text();
+  jsonObj["email"] = ui->editEmail->text();
+  jsonObj["code"] = ui->editCode->text();
+  HttpManager::getInstance()->PostHttpRequest(
+    QUrl(gateUrlPrefix + "/user_register"),
+    jsonObj,
+    RequestID::ID_REGISTER_USER,
+    Modules::MOD_REGISTER);
+}
+
+void
 RegisterDialog::showTip(const QString& tip, bool isOk)
 {
   isOk ? ui->lbErrTip->setProperty("state", "normal")
@@ -95,6 +139,19 @@ RegisterDialog::initHttpHandler()
 
       QString email = obj["email"].toString();
       showTip("验证码已发送到邮箱，注意查收", true);
-      qDebug() << "email is " << email;
+      qDebug() << "[ID_GET_VARIFY_CODE]: email is " << email;
+    });
+
+  m_handlers.emplace(
+    RequestID::ID_REGISTER_USER, [this](const QJsonObject& obj) {
+      ErrorCode err = static_cast<ErrorCode>(obj["error"].toInt());
+      if (err != ErrorCode::SUCCESS) {
+        showTip("参数错误", false);
+        return;
+      }
+
+      auto email = obj["email"].toString();
+      showTip("用户注册成功", true);
+      qDebug() << "ID_REGISTER_USER: email is " << email;
     });
 }

@@ -19,6 +19,7 @@ public:
 private slots:
   void onGetCodeClicked();
   void onRegisterFinished(RequestID redId, const QString& res, ErrorCode err);
+  void onConfirmClicked();
 
 private:
   void showTip(const QString& tip, bool isOk);
