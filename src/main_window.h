@@ -19,6 +19,7 @@ public:
 
 private slots:
   void onSwitchRegister();
+  void onSwitchLogin();
 
 private:
   Ui::MainWindow* ui;

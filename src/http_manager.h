@@ -16,7 +16,7 @@ class HttpManager
 
 public:
   ~HttpManager();
-  void PostHttpRequest(const QUrl& url,
+  void postHttpRequest(const QUrl& url,
                        const QJsonObject& json,
                        RequestID reqId,
                        Modules mod);

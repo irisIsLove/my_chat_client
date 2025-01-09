@@ -9,6 +9,7 @@ class QString;
 
 // qss 刷新
 extern std::function<void(QWidget*)> repolish;
+extern std::function<QString(const QString&)> xorString;
 
 enum class RequestID
 {
@@ -33,6 +34,16 @@ enum class ErrorCode
   ERR_EMAIL_NOT_MATCH,
   ERR_PASS_UP_FAIL,
   ERR_PASS_INVALID,
+};
+
+enum class TipError
+{
+  TIP_SUCCESS,
+  TIP_USER_ERR,
+  TIP_EMAIL_ERR,
+  TIP_PASS_ERR,
+  TIP_VERIFY_ERR,
+  TIP_CODE_ERR,
 };
 
 class QJsonObject;

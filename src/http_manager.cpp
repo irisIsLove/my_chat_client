@@ -23,7 +23,7 @@ HttpManager::HttpManager()
 }
 
 void
-HttpManager::PostHttpRequest(const QUrl& url,
+HttpManager::postHttpRequest(const QUrl& url,
                              const QJsonObject& json,
                              RequestID reqId,
                              Modules mod)

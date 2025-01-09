@@ -12,10 +12,6 @@ MainWindow::MainWindow(QWidget* parent)
   m_loginDlg->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
   setCentralWidget(m_loginDlg);
 
-  m_registerDlg = new RegisterDialog(this);
-  m_registerDlg->setWindowFlags(Qt::CustomizeWindowHint |
-                                Qt::FramelessWindowHint);
-
   connect(m_loginDlg,
           &LoginDialog::sigSwitchRegister,
           this,
@@ -30,5 +26,24 @@ MainWindow::~MainWindow()
 void
 MainWindow::onSwitchRegister()
 {
+  m_registerDlg = new RegisterDialog(this);
+  m_registerDlg->setWindowFlags(Qt::CustomizeWindowHint |
+                                Qt::FramelessWindowHint);
+  connect(m_registerDlg,
+          &RegisterDialog::sigSwitchLogin,
+          this,
+          &MainWindow::onSwitchLogin);
   setCentralWidget(m_registerDlg);
+}
+
+void
+MainWindow::onSwitchLogin()
+{
+  m_loginDlg = new LoginDialog(this);
+  m_loginDlg->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
+  connect(m_loginDlg,
+          &LoginDialog::sigSwitchRegister,
+          this,
+          &MainWindow::onSwitchRegister);
+  setCentralWidget(m_loginDlg);
 }
