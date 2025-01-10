@@ -1,4 +1,4 @@
-QDialog#LoginDialog, #RegisterDialog {
+QDialog#LoginDialog, #RegisterDialog, #ResetDialog {
     background-color: rgb(255, 255, 255);
 }
 
@@ -43,5 +43,29 @@ QDialog#LoginDialog, #RegisterDialog {
 }
 
 #lbVerifyVisible[state='visible_hover'] {
+    border-image: url(:/res/visible_hover.png);
+}
+
+#lbForget[state='normal'], #lbForget[state='selected'] {
+    color: black
+}
+
+#lbForget[state='hover'], #lbForget[state='selected_hover'] {
+    color: rgb(42, 112, 241)
+}
+
+#lbNewPassVisible[state='unvisible'] {
+    border-image: url(:/res/unvisible.png);
+}
+
+#lbNewPassVisible[state='unvisible_hover'] {
+    border-image: url(:/res/unvisible_hover.png);
+}
+
+#lbNewPassVisible[state='visible'] {
+    border-image: url(:/res/visible.png);
+}
+
+#lbNewPassVisible[state='visible_hover'] {
     border-image: url(:/res/visible_hover.png);
 }

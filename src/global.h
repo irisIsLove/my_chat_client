@@ -15,11 +15,13 @@ enum class RequestID
 {
   ID_GET_VARIFY_CODE,
   ID_REGISTER_USER,
+  ID_RESET_PASS,
 };
 
 enum class Modules
 {
   MOD_REGISTER,
+  MOD_RESET,
 };
 
 enum class ErrorCode

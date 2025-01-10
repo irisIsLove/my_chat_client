@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>366</width>
+    <width>367</width>
     <height>533</height>
    </rect>
   </property>
@@ -70,13 +70,13 @@
             <widget class="QLabel" name="lbUser">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>48</width>
                <height>25</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>16777215</width>
+               <width>48</width>
                <height>25</height>
               </size>
              </property>
@@ -109,13 +109,13 @@
             <widget class="QLabel" name="lbEmail">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>48</width>
                <height>25</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>16777215</width>
+               <width>48</width>
                <height>25</height>
               </size>
              </property>
@@ -148,13 +148,13 @@
             <widget class="QLabel" name="lbPass">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>48</width>
                <height>25</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>16777215</width>
+               <width>48</width>
                <height>25</height>
               </size>
              </property>
@@ -206,13 +206,13 @@
             <widget class="QLabel" name="lbVerify">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>48</width>
                <height>25</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>16777215</width>
+               <width>48</width>
                <height>25</height>
               </size>
              </property>
@@ -484,14 +484,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>TimerBtn</class>
-   <extends>QPushButton</extends>
-   <header>timer_btn.h</header>
-  </customwidget>
-  <customwidget>
    <class>ClickedLabel</class>
    <extends>QLabel</extends>
    <header>clicked_label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TimerBtn</class>
+   <extends>QPushButton</extends>
+   <header>timer_btn.h</header>
   </customwidget>
  </customwidgets>
  <resources>

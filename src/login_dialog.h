@@ -16,6 +16,7 @@ public:
 
 signals:
   void sigSwitchRegister();
+  void sigSwitchReset();
 
 private:
   Ui::LoginDialog* ui;

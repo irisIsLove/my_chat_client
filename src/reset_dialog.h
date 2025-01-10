@@ -1,5 +1,5 @@
-#ifndef REGISTERDIALOG_H
-#define REGISTERDIALOG_H
+#ifndef RESETDIALOG_H
+#define RESETDIALOG_H
 
 #include "global.h"
 
@@ -7,28 +7,24 @@
 #include <QMap>
 
 namespace Ui {
-class RegisterDialog;
+class ResetDialog;
 }
 
-class QTimer;
-
-class RegisterDialog : public QDialog
+class ResetDialog : public QDialog
 {
   Q_OBJECT
 public:
-  explicit RegisterDialog(QWidget* parent = nullptr);
-  ~RegisterDialog();
+  explicit ResetDialog(QWidget* parent = nullptr);
+  ~ResetDialog();
 
 private slots:
   void onGetCodeClicked();
-  void onRegisterFinished(RequestID redId, const QString& res, ErrorCode err);
+  void onResetFinished(RequestID redId, const QString& res, ErrorCode err);
   void onConfirmClicked();
   bool onUserFinished();
   bool onEmailFinished();
   bool onPassFinished();
-  bool onVerifyFinished();
   bool onCodeFinished();
-  void onReturnClicked();
 
 signals:
   void sigSwitchLogin();
@@ -38,14 +34,11 @@ private:
   void initHttpHandler();
   void addTipErr(TipError err, const QString& tip);
   void deleteTipErr(TipError err);
-  void changeTipPage();
 
 private:
-  Ui::RegisterDialog* ui;
+  Ui::ResetDialog* ui;
   FuncMap m_handlers;
   QMap<TipError, QString> m_tips;
-  QTimer* m_timerCountdown = nullptr;
-  int m_countdown = 5;
 };
 
-#endif // REGISTERDIALOG_H
+#endif // RESETDIALOG_H

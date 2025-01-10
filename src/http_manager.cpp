@@ -11,8 +11,15 @@ HttpManager::onHttpFinished(RequestID reqId,
                             ErrorCode err,
                             Modules mod)
 {
-  if (mod == Modules::MOD_REGISTER) {
-    emit sigRegisterFinished(reqId, res, err);
+  switch (mod) {
+    case Modules::MOD_REGISTER:
+      emit sigRegisterFinished(reqId, res, err);
+      break;
+    case Modules::MOD_RESET:
+      emit sigResetFinished(reqId, res, err);
+      break;
+    default:
+      break;
   }
 }
 

@@ -39,11 +39,11 @@ void
 ClickedLabel::enterEvent(QEvent* event)
 {
   if (m_curState == ClickedLbState::Normal) {
-    qDebug() << "ClickedLabel::enterEvent: Normal -> Hover";
+    qDebug() << objectName() << "::enterEvent: Normal -> Hover";
     setProperty("state", m_qsHover);
     repolish(this);
   } else {
-    qDebug() << "ClickedLabel::enterEvent: Selected -> SelectedHover";
+    qDebug() << objectName() << "::enterEvent: Selected -> SelectedHover";
     setProperty("state", m_qsSelectedHover);
     repolish(this);
   }
@@ -55,11 +55,11 @@ void
 ClickedLabel::leaveEvent(QEvent* event)
 {
   if (m_curState == ClickedLbState::Normal) {
-    qDebug() << "ClickedLabel::leaveEvent: Hover -> Normal";
+    qDebug() << objectName() << "::leaveEvent: Hover -> Normal";
     setProperty("state", m_qsNorml);
     repolish(this);
   } else {
-    qDebug() << "ClickedLabel::leaveEvent: SelectedHover -> Selected";
+    qDebug() << objectName() << "::leaveEvent: SelectedHover -> Selected";
     setProperty("state", m_qsSelected);
     repolish(this);
   }
@@ -72,12 +72,12 @@ ClickedLabel::mousePressEvent(QMouseEvent* ev)
 {
   if (ev->button() == Qt::LeftButton) {
     if (m_curState == ClickedLbState::Normal) {
-      qDebug() << "ClickedLabel::mousePressEvent: Normal -> Selected";
+      qDebug() << objectName() << "::mousePressEvent: Normal -> Selected";
       m_curState = ClickedLbState::Selected;
       setProperty("state", m_qsSelectedHover);
       repolish(this);
     } else {
-      qDebug() << "ClickedLabel::mousePressEvent: Selected -> Normal";
+      qDebug() << objectName() << "::mousePressEvent: Selected -> Normal";
       m_curState = ClickedLbState::Normal;
       setProperty("state", m_qsHover);
       repolish(this);

@@ -20,11 +20,10 @@ public:
 private slots:
   void onSwitchRegister();
   void onSwitchLogin();
+  void onSwitchReset();
 
 private:
   Ui::MainWindow* ui;
-  LoginDialog* m_loginDlg = nullptr;
-  RegisterDialog* m_registerDlg = nullptr;
 };
 
 #endif // MAINWINDOW_H

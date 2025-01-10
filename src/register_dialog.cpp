@@ -67,7 +67,7 @@ RegisterDialog::RegisterDialog(QWidget* parent)
   connect(ui->btnCancel,
           &QPushButton::clicked,
           this,
-          &RegisterDialog::onCancelClicked);
+          &RegisterDialog::sigSwitchLogin);
   connect(ui->lbPassVisible, &ClickedLabel::sigClicked, [this]() {
     auto state = ui->lbPassVisible->getState();
     state == ClickedLbState::Normal
@@ -233,12 +233,6 @@ void
 RegisterDialog::onReturnClicked()
 {
   m_timerCountdown->stop();
-  emit sigSwitchLogin();
-}
-
-void
-RegisterDialog::onCancelClicked()
-{
   emit sigSwitchLogin();
 }
 
