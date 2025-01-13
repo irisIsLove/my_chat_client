@@ -31,6 +31,7 @@ signals:
   void sigHttpFinished(RequestID, const QString&, ErrorCode, Modules);
   void sigRegisterFinished(RequestID, const QString&, ErrorCode);
   void sigResetFinished(RequestID, const QString&, ErrorCode);
+  void sigLoginFinished(RequestID, const QString&, ErrorCode);
 
 private:
   HttpManager();

@@ -18,6 +18,9 @@ HttpManager::onHttpFinished(RequestID reqId,
     case Modules::MOD_RESET:
       emit sigResetFinished(reqId, res, err);
       break;
+    case Modules::MOD_LOGIN:
+      emit sigLoginFinished(reqId, res, err);
+      break;
     default:
       break;
   }

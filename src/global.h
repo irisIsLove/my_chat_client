@@ -1,11 +1,11 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+#include <QString>
+
 #include <functional>
-#include <unordered_map>
 
 class QWidget;
-class QString;
 
 // qss 刷新
 extern std::function<void(QWidget*)> repolish;
@@ -25,6 +25,7 @@ enum class Modules
 {
   MOD_REGISTER,
   MOD_RESET,
+  MOD_LOGIN,
 };
 
 enum class ErrorCode
@@ -56,5 +57,13 @@ using FuncMap =
   std::unordered_map<RequestID, std::function<void(const QJsonObject&)>>;
 
 extern QString gateUrlPrefix;
+
+struct ServerInfo
+{
+  QString host;
+  QString port;
+  QString token;
+  int uid;
+};
 
 #endif // GLOBAL_H
