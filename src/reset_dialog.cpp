@@ -17,6 +17,9 @@ ResetDialog::ResetDialog(QWidget* parent)
   ui->lbNewPassVisible->setCursor(Qt::PointingHandCursor);
   ui->lbNewPassVisible->setState(
     "unvisible", "unvisible_hover", "", "visible", "visible_hover", "");
+  repolish(ui->lbErrTip);
+
+  initHttpHandler();
 
   connect(
     ui->btnCancel, &QPushButton::clicked, this, &ResetDialog::sigSwitchLogin);
@@ -73,7 +76,7 @@ ResetDialog::onGetCodeClicked()
       QUrl(gateUrlPrefix + "/get_varify_code"),
       jsonObj,
       RequestID::ID_GET_VARIFY_CODE,
-      Modules::MOD_REGISTER);
+      Modules::MOD_RESET);
   }
 }
 
@@ -110,8 +113,8 @@ ResetDialog::onConfirmClicked()
   HttpManager::getInstance()->postHttpRequest(
     QUrl(gateUrlPrefix + "/reset_pass"),
     jsonObj,
-    RequestID::ID_REGISTER_USER,
-    Modules::MOD_REGISTER);
+    RequestID::ID_RESET_PASS,
+    Modules::MOD_RESET);
 }
 
 bool
@@ -213,9 +216,8 @@ ResetDialog::initHttpHandler()
     }
 
     QString email = obj["email"].toString();
-    showTip("重置成功,点击返回登录", true);
+    showTip("重置成功,点击“取消”返回登录", true);
     qDebug() << "[ID_RESET_PASS]: email is " << email;
-    qDebug() << "[ID_RESET_PASS]: uid is " << obj["uid"].toInt();
   });
 }
 

@@ -16,6 +16,9 @@ enum class RequestID
   ID_GET_VARIFY_CODE,
   ID_REGISTER_USER,
   ID_RESET_PASS,
+  ID_USER_LOGIN,
+  ID_CHAT_LOGIN,
+  ID_CHAT_LOGIN_RSP,
 };
 
 enum class Modules
