@@ -21,6 +21,8 @@ public:
 private slots:
   void onLoginClicked();
   void onLoginFinished(RequestID redId, const QString& res, ErrorCode err);
+  void onTcpConnectFinished(bool isOk);
+  void onLoginFailed(ErrorCode err);
 
 signals:
   void sigSwitchRegister();

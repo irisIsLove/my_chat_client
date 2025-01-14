@@ -1,5 +1,6 @@
 #include "login_dialog.h"
 #include "http_manager.h"
+#include "tcp_manager.h"
 #include "ui_login_dialog.h"
 
 #include <QJsonDocument>
@@ -36,6 +37,18 @@ LoginDialog::LoginDialog(QWidget* parent)
           &HttpManager::sigLoginFinished,
           this,
           &LoginDialog::onLoginFinished);
+  connect(this,
+          &LoginDialog::sigConnectTcp,
+          TcpManager::getInstance().get(),
+          &TcpManager::onTcpConnect);
+  connect(TcpManager::getInstance().get(),
+          &TcpManager::sigConnectSuccess,
+          this,
+          &LoginDialog::onTcpConnectFinished);
+  connect(TcpManager::getInstance().get(),
+          &TcpManager::sigLoginFailed,
+          this,
+          &LoginDialog::onLoginFailed);
 }
 
 LoginDialog::~LoginDialog()
@@ -79,6 +92,33 @@ LoginDialog::onLoginFinished(RequestID redId, const QString& res, ErrorCode err)
     return;
   }
   onLogin(jsonDoc.object());
+}
+
+void
+LoginDialog::onTcpConnectFinished(bool isOk)
+{
+  if (isOk) {
+    showTip("聊天服务连接成功，正在登录...", true);
+
+    QJsonObject json;
+    json["uid"] = m_uid;
+    json["token"] = m_token;
+    QJsonDocument doc(json);
+    QString qsJson = doc.toJson(QJsonDocument::Indented);
+
+    emit TcpManager::getInstance() -> sigSendData(RequestID::ID_CHAT_LOGIN,
+                                                  qsJson);
+  } else {
+    showTip("网络异常", false);
+    enableBtn(true);
+  }
+}
+
+void
+LoginDialog::onLoginFailed(ErrorCode err)
+{
+  showTip(QString("登录失败，错误码：%1").arg(static_cast<int>(err)), false);
+  enableBtn(true);
 }
 
 void
