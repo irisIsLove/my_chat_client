@@ -195,8 +195,7 @@ LoginDialog::onLogin(const QJsonObject& json)
 
   m_uid = si.uid;
   m_token = si.token;
-  qDebug() << "[LoginDialog::onLogin] email: " << email << " uid: " << m_uid
-           << " host: " << si.host << " port: " << si.port
-           << "token: " << m_token;
+  qDebug() << "[LoginDialog::onLogin] email:" << email << "uid:" << m_uid
+           << "host:" << si.host << "port:" << si.port << "token:" << m_token;
   emit sigConnectTcp(si);
 }
