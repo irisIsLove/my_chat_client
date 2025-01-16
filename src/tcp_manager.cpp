@@ -1,4 +1,5 @@
 #include "tcp_manager.h"
+#include "user_manager.h"
 
 #include <QDataStream>
 #include <QJsonDocument>
@@ -108,7 +109,9 @@ TcpManager::initHandler()
         return;
       }
 
-      // TODO: UserManager
+      UserManager::getInstance()->setName(json["name"].toString());
+      UserManager::getInstance()->setToken(json["token"].toString());
+      UserManager::getInstance()->setUid(json["uid"].toInt());
       emit sigSwitchChat();
     });
 }
@@ -117,7 +120,7 @@ void
 TcpManager::handleMessage(RequestID id, int length, const QByteArray& data)
 {
   auto iter = m_handlers.find(id);
-  if (iter != m_handlers.end()) {
+  if (iter == m_handlers.end()) {
     qDebug() << "[TcpManager::handleMessage]: Not found id"
              << static_cast<int>(id);
     return;
