@@ -1,7 +1,9 @@
 #include "main_window.h"
+#include "chat_dialog.h"
 #include "login_dialog.h"
 #include "register_dialog.h"
 #include "reset_dialog.h"
+#include "tcp_manager.h"
 #include "ui_main_window.h"
 
 MainWindow::MainWindow(QWidget* parent)
@@ -10,6 +12,12 @@ MainWindow::MainWindow(QWidget* parent)
 {
   ui->setupUi(this);
   onSwitchLogin();
+
+  connect(TcpManager::getInstance().get(),
+          &TcpManager::sigSwitchChat,
+          this,
+          &MainWindow::onSwitchChat);
+  emit TcpManager::getInstance() -> sigSwitchChat();
 }
 
 MainWindow::~MainWindow()
@@ -52,4 +60,14 @@ MainWindow::onSwitchReset()
   connect(
     resetDlg, &ResetDialog::sigSwitchLogin, this, &MainWindow::onSwitchLogin);
   setCentralWidget(resetDlg);
+}
+
+void
+MainWindow::onSwitchChat()
+{
+  ChatDialog* chatDlg = new ChatDialog(this);
+  chatDlg->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
+  setCentralWidget(chatDlg);
+  setMinimumSize(1050, 900);
+  setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
 }

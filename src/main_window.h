@@ -21,6 +21,7 @@ private slots:
   void onSwitchRegister();
   void onSwitchLogin();
   void onSwitchReset();
+  void onSwitchChat();
 
 private:
   Ui::MainWindow* ui;
