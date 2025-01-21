@@ -52,6 +52,23 @@ enum class TipError
   TIP_CODE_ERR,
 };
 
+enum class ChatUiMode
+{
+  MODE_SEARCH,
+  MODE_CHAT,
+  MODE_CONTACT,
+};
+
+enum class ItemType
+{
+  ITEM_CHAT_USER,
+  ITEM_CONTACT_USER,
+  ITEM_SEARCH_USER,
+  ITEM_ADD_USER_TIP,
+  ITEM_INVALID,
+  ITEM_GROUP_TIP,
+};
+
 class QJsonObject;
 using FuncMap =
   std::unordered_map<RequestID, std::function<void(const QJsonObject&)>>;

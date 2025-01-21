@@ -1,8 +1,6 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
-#include <fmt/core.h>
-
 #include <memory>
 #include <mutex>
 
@@ -17,7 +15,7 @@ public:
     return m_instance;
   }
 
-  ~Singleton() { fmt::println("Singleton destroyed"); }
+  ~Singleton() {}
 
 protected:
   Singleton() = default;

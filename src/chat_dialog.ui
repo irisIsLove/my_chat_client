@@ -196,7 +196,7 @@
           <number>9</number>
          </property>
          <item>
-          <widget class="QLineEdit" name="editSearch"/>
+          <widget class="CustomizeEdit" name="editSearch"/>
          </item>
          <item>
           <spacer name="horizontalSpacer">
@@ -240,10 +240,13 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="listChatHistory"/>
+       <widget class="ChatHistoryList" name="listHistory"/>
       </item>
       <item>
        <widget class="QListWidget" name="listSearch"/>
+      </item>
+      <item>
+       <widget class="QListWidget" name="listContact"/>
       </item>
      </layout>
     </widget>
@@ -540,6 +543,16 @@
    <class>ClickedBtn</class>
    <extends>QPushButton</extends>
    <header>clicked_btn.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CustomizeEdit</class>
+   <extends>QLineEdit</extends>
+   <header>customize_edit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ChatHistoryList</class>
+   <extends>QListWidget</extends>
+   <header>chat_history_list.h</header>
   </customwidget>
  </customwidgets>
  <resources>
