@@ -28,6 +28,7 @@ protected:
   void enterEvent(QEvent* event) override;
   void leaveEvent(QEvent* event) override;
   void mousePressEvent(QMouseEvent* ev) override;
+  void mouseReleaseEvent(QMouseEvent* ev) override;
 
 signals:
   void sigClicked();

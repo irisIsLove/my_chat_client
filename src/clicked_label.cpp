@@ -74,16 +74,38 @@ ClickedLabel::mousePressEvent(QMouseEvent* ev)
     if (m_curState == ClickedLbState::Normal) {
       qDebug() << objectName() << "::mousePressEvent: Normal -> Selected";
       m_curState = ClickedLbState::Selected;
-      setProperty("state", m_qsSelectedHover);
+      setProperty("state", m_qsSelectedClicked);
       repolish(this);
     } else {
       qDebug() << objectName() << "::mousePressEvent: Selected -> Normal";
+      m_curState = ClickedLbState::Normal;
+      setProperty("state", m_qsClicked);
+      repolish(this);
+    }
+    update();
+    return;
+  }
+  QLabel::mousePressEvent(ev);
+}
+
+void
+ClickedLabel::mouseReleaseEvent(QMouseEvent* ev)
+{
+  if (ev->button() == Qt::LeftButton) {
+    if (m_curState == ClickedLbState::Normal) {
+      qDebug() << objectName() << "::mouseReleaseEvent: Normal -> Selected";
+      m_curState = ClickedLbState::Selected;
+      setProperty("state", m_qsSelectedHover);
+      repolish(this);
+    } else {
+      qDebug() << objectName() << "::mouseReleaseEvent: Selected -> Normal";
       m_curState = ClickedLbState::Normal;
       setProperty("state", m_qsHover);
       repolish(this);
     }
     update();
     emit sigClicked();
+    return;
   }
-  QLabel::mousePressEvent(ev);
+  QLabel::mouseReleaseEvent(ev);
 }

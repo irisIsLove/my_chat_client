@@ -1,9 +1,11 @@
 #include "chat_dialog.h"
 #include "chat_history_widget.h"
+#include "loading_dialog.h"
 #include "ui_chat_dialog.h"
 
 #include <QAction>
 #include <QRandomGenerator>
+#include <QtDebug>
 
 ChatDialog::ChatDialog(QWidget* parent)
   : QDialog(parent)
@@ -34,6 +36,10 @@ ChatDialog::ChatDialog(QWidget* parent)
     showUserSearch();
   });
 
+  connect(ui->listHistory,
+          &ChatHistoryList::sigLoadingHistory,
+          this,
+          &ChatDialog::onLoadingHistory);
   showUserSearch();
   addTestList();
 }
@@ -72,6 +78,23 @@ ChatDialog::addTestList()
     ui->listHistory->addItem(item);
     ui->listHistory->setItemWidget(item, chatHistoryItem);
   }
+}
+
+void
+ChatDialog::onLoadingHistory()
+{
+  if (m_isLoading)
+    return;
+
+  m_isLoading = true;
+  LoadingDialog* loadingDlg = new LoadingDialog(this);
+  loadingDlg->setModal(true);
+  loadingDlg->show();
+
+  qDebug() << "[ChatDialog::onLoadingHistory] loading new data to list...";
+  addTestList();
+  loadingDlg->deleteLater();
+  m_isLoading = false;
 }
 
 void

@@ -13,6 +13,9 @@ public:
   ItemType getItemType() const;
   void setItemType(ItemType type);
 
+protected:
+  void paintEvent(QPaintEvent* event) override;
+
 private:
   ItemType m_type;
 };

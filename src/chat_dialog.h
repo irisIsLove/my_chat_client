@@ -16,6 +16,9 @@ public:
   ~ChatDialog();
   void addTestList();
 
+private slots:
+  void onLoadingHistory();
+
 private:
   void showUserSearch(bool isSearch = false);
 
