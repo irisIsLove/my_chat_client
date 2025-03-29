@@ -265,3 +265,15 @@ LoginDialog {
 #lbFile[state='press']{
     border-image: url(:/res/filedir_press.png);
 }
+
+#widMessage {
+    background: #f0f0f0;
+}
+
+#chat_back_ground {
+    background: #f0f0f0
+}
+
+#chat_area {
+    border: none
+}
